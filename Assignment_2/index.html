@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ByteShop - Single Page App</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .page { display: none; }
+    .page.active { display: block; }
+    .page-hidden { display: none !important; }
+    .nav-item.active { color: #2563eb; }
+    .payment-option.selected { border-color: #2563eb; background: #eff6ff; }
+  </style>
+</head>
+<body>
+  <!-- Welcome Page -->
+  <main id="welcomeSection" class="page">
+    <div class="welcome-screen" style="background-image: url('https://images.unsplash.com/photo-1670594454616-f42558870fdf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnYW1pbmclMjBzZXR1cCUyMGRlc2slMjBtb25pdG9yfGVufDF8fHx8MTc3NjI3OTUyNHww&ixlib=rb-4.1.0&q=80&w=1080');">
+      <div class="welcome-overlay"></div>
+      <div class="welcome-content">
+        <div class="mb-6">
+          <h1 class="logo">ByteShop</h1>
+          <p class="tagline">Premium Gaming Gear & Tech</p>
+        </div>
+        <a href="#login" class="btn btn-primary">Get Started</a>
+        <p style="margin-top: 1.5rem; color: #d1d5db;">Explore the latest gadgets and accessories</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Login Page -->
+  <main id="loginSection" class="page">
+    <div class="auth-screen">
+      <div class="auth-container">
+        <div class="auth-header">
+          <h1>Welcome Back!</h1>
+          <p>Sign in to continue shopping</p>
+        </div>
+        <div class="auth-card">
+          <form id="loginForm">
+            <div class="form-group">
+              <label for="loginEmail">Email Address</label>
+              <input type="email" id="loginEmail" class="form-control" placeholder="you@example.com" required>
+            </div>
+            <div class="form-group">
+              <label for="loginPassword">Password</label>
+              <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required>
+            </div>
+            <div class="text-right" style="margin-bottom: 1.5rem;">
+              <a href="#" class="link">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+          </form>
+          <p class="text-center">
+            Don't have an account? 
+            <a href="#signup" class="link" style="font-weight: 600;">Sign Up</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Sign Up Page -->
+  <main id="signupSection" class="page">
+    <div class="auth-screen">
+      <div class="auth-container">
+        <div class="auth-header">
+          <h1>Create Account</h1>
+          <p>Join ByteShop today</p>
+        </div>
+        <div class="auth-card">
+          <form id="signupForm">
+            <div class="form-group">
+              <label for="signupName">Full Name</label>
+              <input type="text" id="signupName" class="form-control" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+              <label for="signupEmail">Email Address</label>
+              <input type="email" id="signupEmail" class="form-control" placeholder="you@example.com" required>
+            </div>
+            <div class="form-group">
+              <label for="signupPassword">Create Password</label>
+              <input type="password" id="signupPassword" class="form-control" placeholder="••••••••" required>
+            </div>
+            <div class="form-group">
+              <label for="signupConfirmPassword">Confirm Password</label>
+              <input type="password" id="signupConfirmPassword" class="form-control" placeholder="••••••••" required>
+            </div>
+            <div class="checkbox-group" style="margin-bottom: 1.5rem;">
+              <input type="checkbox" id="signupTerms" required>
+              <label for="signupTerms" style="font-size: 0.875rem; color: #6b7280;">
+                I agree to the <a href="#" class="link">Terms and Conditions</a>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" style="background: linear-gradient(to right, #9333ea, #2563eb);">
+              Create Account
+            </button>
+          </form>
+          <p class="text-center">
+            Already have an account? 
+            <a href="#login" class="link" style="font-weight: 600;">Login</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Home Page -->
+  <main id="homeSection" class="page" style="background: #f9fafb; padding-bottom: 5rem;">
+    <div class="header">
+      <div class="header-content">
+        <h1 class="header-logo">ByteShop</h1>
+        <div class="header-icons">
+          <a href="#search" class="icon-btn">
+            <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </a>
+          <a href="#cart" class="icon-btn">
+            <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+            <span class="badge" id="cartBadge" style="display: none;">0</span>
+          </a>
+          <a href="#profile" class="icon-btn">
+            <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="banner">
+        <h2>50% Off Sale</h2>
+        <p style="opacity: 0.9;">Limited time offer on selected items</p>
+      </div>
+      <div class="categories">
+        <h2 class="section-title">Categories</h2>
+        <div class="category-grid">
+          <a href="#search?category=Keyboards" class="category-item">
+            <div class="category-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
+              </svg>
+            </div>
+            <span class="category-name">Keyboards</span>
+          </a>
+          <a href="#search?category=Mice" class="category-item">
+            <div class="category-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+              </svg>
+            </div>
+            <span class="category-name">Mice</span>
+          </a>
+          <a href="#search?category=Monitors" class="category-item">
+            <div class="category-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <span class="category-name">Monitors</span>
+          </a>
+          <a href="#search?category=Headsets" class="category-item">
+            <div class="category-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
+              </svg>
+            </div>
+            <span class="category-name">Headsets</span>
+          </a>
+        </div>
+      </div>
+      <div class="products-section">
+        <div class="section-header">
+          <h2 class="section-title">Featured Products</h2>
+          <a href="#search" class="link">View All</a>
+        </div>
+        <div class="product-grid" id="featuredProducts"></div>
+      </div>
+    </div>
+    <nav class="bottom-nav">
+      <div class="bottom-nav-content">
+        <a href="#home" class="nav-item" data-route="home">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+          </svg>
+          <span class="nav-label">Home</span>
+        </a>
+        <a href="#search" class="nav-item" data-route="search">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <span class="nav-label">Search</span>
+        </a>
+        <a href="#cart" class="nav-item" data-route="cart">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+          <span class="nav-label">Cart</span>
+        </a>
+        <a href="#profile" class="nav-item" data-route="profile">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+          </svg>
+          <span class="nav-label">Profile</span>
+        </a>
+      </div>
+    </nav>
+  </main>
+
+  <!-- Search Page -->
+  <main id="searchSection" class="page" style="background: #f9fafb; padding-bottom: 5rem;">
+    <div class="header">
+      <div class="header-content">
+        <a href="#home" style="text-decoration: none;">
+          <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </a>
+        <div style="flex: 1; margin-left: 1rem; position: relative;">
+          <svg style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); width: 1.25rem; height: 1.25rem; color: #9ca3af;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <input type="text" id="searchInput" placeholder="Search products..." class="form-control" style="padding-left: 2.5rem;">
+        </div>
+      </div>
+    </div>
+    <div class="container" style="padding-top: 1.5rem;">
+      <div class="mb-6">
+        <h2 class="section-title" id="categoryTitle">All Products</h2>
+        <p style="font-size: 0.875rem; color: #6b7280; margin-top: 0.25rem;" id="productCount">0 products found</p>
+      </div>
+      <div class="product-grid" id="productsContainer"></div>
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <div class="empty-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+        </div>
+        <p style="color: #6b7280;">No products found</p>
+        <p style="font-size: 0.875rem; color: #9ca3af; margin-top: 0.5rem;">Try searching for something else</p>
+      </div>
+    </div>
+    <nav class="bottom-nav">
+      <div class="bottom-nav-content">
+        <a href="#home" class="nav-item" data-route="home">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+          </svg>
+          <span class="nav-label">Home</span>
+        </a>
+        <a href="#search" class="nav-item active" data-route="search">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <span class="nav-label">Search</span>
+        </a>
+        <a href="#cart" class="nav-item" data-route="cart">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+          <span class="nav-label">Cart</span>
+        </a>
+        <a href="#profile" class="nav-item" data-route="profile">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+          </svg>
+          <span class="nav-label">Profile</span>
+        </a>
+      </div>
+    </nav>
+  </main>
+
+  <!-- Product Page -->
+  <main id="productSection" class="page" style="background: #f9fafb;">
+    <div class="header">
+      <div class="header-content">
+        <a href="#search" style="text-decoration: none;">
+          <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </a>
+        <h1 style="font-weight: 600; color: #111827; font-size: 1rem;">Product Details</h1>
+        <div style="width: 1.5rem;"></div>
+      </div>
+    </div>
+    <div style="max-width: 480px; margin: 0 auto; padding-bottom: 6rem;">
+      <div style="background: white;">
+        <div style="aspect-ratio: 1; overflow: hidden;">
+          <img id="productImage" style="width: 100%; height: 100%; object-fit: cover;" alt="Product Image">
+        </div>
+      </div>
+      <div style="background: white; margin-top: 1rem; padding: 1.5rem;">
+        <h1 id="productName" style="font-size: 1.5rem; font-weight: bold; color: #111827; margin-bottom: 0.5rem;"></h1>
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+          <div class="product-rating">
+            <svg viewBox="0 0 24 24" style="width: 1.25rem; height: 1.25rem;">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            <span id="productRating" style="font-weight: 600;"></span>
+          </div>
+          <span style="color: #9ca3af;">•</span>
+          <span style="font-size: 0.875rem; color: #6b7280;">128 reviews</span>
+        </div>
+        <div id="productPrice" style="font-size: 1.875rem; font-weight: bold; color: #2563eb; margin-bottom: 1rem;"></div>
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="font-weight: 600; color: #111827; margin-bottom: 0.5rem;">Description</h3>
+          <p id="productDescription" style="color: #6b7280; line-height: 1.6;"></p>
+        </div>
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="font-weight: 600; color: #111827; margin-bottom: 0.75rem;">Color</h3>
+          <div style="display: flex; gap: 0.75rem;">
+            <button class="color-option" data-color="Black" style="padding: 0.5rem 1.5rem; border-radius: 0.5rem; border: 2px solid #2563eb; background: #eff6ff; color: #2563eb; cursor: pointer; transition: all 0.2s;">
+              Black
+            </button>
+            <button class="color-option" data-color="White" style="padding: 0.5rem 1.5rem; border-radius: 0.5rem; border: 2px solid #d1d5db; background: white; color: #374151; cursor: pointer; transition: all 0.2s;">
+              White
+            </button>
+          </div>
+        </div>
+      </div>
+      <div style="position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid #e5e7eb; padding: 1.5rem; z-index: 30;">
+        <div style="max-width: 480px; margin: 0 auto; display: flex; gap: 0.75rem;">
+          <button id="addToCartBtn" class="btn btn-secondary" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+            <svg style="width: 1.25rem; height: 1.25rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+            Add to Cart
+          </button>
+          <button id="buyNowBtn" class="btn btn-primary" style="flex: 1; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+            <svg style="width: 1.25rem; height: 1.25rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+            </svg>
+            Buy Now
+          </button>
+        </div>
+      </div>
+      <div style="height: 6rem;"></div>
+    </div>
+  </main>
+
+  <!-- Cart Page -->
+  <main id="cartSection" class="page" style="background: #f9fafb; padding-bottom: 5rem;">
+    <div class="header">
+      <div class="header-content">
+        <a href="#home" style="text-decoration: none;">
+          <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </a>
+        <h1 style="font-weight: 600; color: #111827; font-size: 1rem;">Shopping Cart</h1>
+        <div style="width: 1.5rem;"></div>
+      </div>
+    </div>
+    <div class="container" style="padding-top: 1.5rem;">
+      <div id="cartItems"></div>
+      <div id="orderSummary"></div>
+      <div id="emptyCart" class="empty-state" style="display: none;">
+        <div class="empty-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+          </svg>
+        </div>
+        <h2 style="font-size: 1.25rem; font-weight: 600; color: #111827; margin-bottom: 0.5rem;">Your cart is empty</h2>
+        <p style="color: #6b7280; margin-bottom: 1.5rem;">Add some products to get started</p>
+        <a href="#home" class="btn btn-secondary" style="padding: 0.75rem 2rem; border-radius: 0.5rem;">Continue Shopping</a>
+      </div>
+    </div>
+    <div id="checkoutButton" class="fixed-bottom" style="display: none;">
+      <div class="container">
+        <a href="#shipping" class="btn btn-primary btn-block" style="border-radius: 0.5rem; padding: 1rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+          Proceed to Checkout
+        </a>
+      </div>
+    </div>
+    <nav class="bottom-nav">
+      <div class="bottom-nav-content">
+        <a href="#home" class="nav-item" data-route="home">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+          </svg>
+          <span class="nav-label">Home</span>
+        </a>
+        <a href="#search" class="nav-item" data-route="search">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <span class="nav-label">Search</span>
+        </a>
+        <a href="#cart" class="nav-item active" data-route="cart">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+          <span class="nav-label">Cart</span>
+        </a>
+        <a href="#profile" class="nav-item" data-route="profile">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+          </svg>
+          <span class="nav-label">Profile</span>
+        </a>
+      </div>
+    </nav>
+  </main>
+
+  <!-- Profile Page -->
+  <main id="profileSection" class="page" style="background: #f9fafb; padding-bottom: 5rem;">
+    <div style="background: linear-gradient(to right, #2563eb, #9333ea); color: white; padding: 1.5rem; padding-bottom: 3rem;">
+      <div class="container">
+        <h1 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem;">Profile</h1>
+        <div id="userInfo" style="display: flex; align-items: center; gap: 1rem;">
+          <div style="width: 4rem; height: 4rem; background: rgba(255, 255, 255, 0.2); border-radius: 9999px; display: flex; align-items: center; justify-content: center;">
+            <svg style="width: 2rem; height: 2rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            </svg>
+          </div>
+          <div>
+            <p id="userName" style="font-weight: 600; font-size: 1.125rem;"></p>
+            <p id="userEmail" style="opacity: 0.8; font-size: 0.875rem;"></p>
+          </div>
+        </div>
+        <div id="loginPrompt" style="text-align: center; display: none;">
+          <p style="margin-bottom: 1rem;">Sign in to access your account</p>
+          <a href="#login" style="display: inline-block; background: white; color: #2563eb; padding: 0.5rem 1.5rem; border-radius: 0.5rem; font-weight: 600; text-decoration: none;">
+            Sign In
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="container" style="margin-top: -1.5rem;">
+      <div style="background: white; border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); overflow: hidden; margin-bottom: 1.5rem;">
+        <a href="#" style="display: flex; align-items: center; justify-content: space-between; padding: 1rem; text-decoration: none; color: inherit; border-bottom: 1px solid #f3f4f6; transition: background 0.2s;" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background='white'">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div style="width: 2.5rem; height: 2.5rem; background: #f3f4f6; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">
+              <svg style="width: 1.25rem; height: 1.25rem; color: #4b5563;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+              </svg>
+            </div>
+            <span style="font-weight: 500; color: #111827;">My Orders</span>
+          </div>
+          <svg style="width: 1.25rem; height: 1.25rem; color: #9ca3af;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="#" style="display: flex; align-items: center; justify-content: space-between; padding: 1rem; text-decoration: none; color: inherit; border-bottom: 1px solid #f3f4f6; transition: background 0.2s;" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background='white'">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div style="width: 2.5rem; height: 2.5rem; background: #f3f4f6; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">
+              <svg style="width: 1.25rem; height: 1.25rem; color: #4b5563;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+            <span style="font-weight: 500; color: #111827;">Saved Addresses</span>
+          </div>
+          <svg style="width: 1.25rem; height: 1.25rem; color: #9ca3af;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="#" style="display: flex; align-items: center; justify-content: space-between; padding: 1rem; text-decoration: none; color: inherit; border-bottom: 1px solid #f3f4f6; transition: background 0.2s;" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background='white'">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div style="width: 2.5rem; height: 2.5rem; background: #f3f4f6; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">
+              <svg style="width: 1.25rem; height: 1.25rem; color: #4b5563;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+              </svg>
+            </div>
+            <span style="font-weight: 500; color: #111827;">Payment Methods</span>
+          </div>
+          <svg style="width: 1.25rem; height: 1.25rem; color: #9ca3af;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="#" style="display: flex; align-items: center; justify-content: space-between; padding: 1rem; text-decoration: none; color: inherit; border-bottom: 1px solid #f3f4f6; transition: background 0.2s;" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background='white'">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div style="width: 2.5rem; height: 2.5rem; background: #f3f4f6; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">
+              <svg style="width: 1.25rem; height: 1.25rem; color: #4b5563;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+              </svg>
+            </div>
+            <span style="font-weight: 500; color: #111827;">Notifications</span>
+          </div>
+          <svg style="width: 1.25rem; height: 1.25rem; color: #9ca3af;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="#" style="display: flex; align-items: center; justify-content: space-between; padding: 1rem; text-decoration: none; color: inherit; transition: background 0.2s;" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background='white'">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div style="width: 2.5rem; height: 2.5rem; background: #f3f4f6; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">
+              <svg style="width: 1.25rem; height: 1.25rem; color: #4b5563;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <span style="font-weight: 500; color: #111827;">Help & Support</span>
+          </div>
+          <svg style="width: 1.25rem; height: 1.25rem; color: #9ca3af;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+      <button id="logoutBtn" style="width: 100%; background: white; border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); padding: 1rem; display: none; align-items: center; justify-content: center; gap: 0.75rem; color: #ef4444; border: none; cursor: pointer; font-weight: 500; font-size: 1rem; transition: background 0.2s;" onmouseover="this.style.background='#fef2f2'" onmouseout="this.style.background='white'">
+        <svg style="width: 1.25rem; height: 1.25rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+        </svg>
+        Logout
+      </button>
+      <div style="text-align: center; margin-top: 2rem; font-size: 0.875rem; color: #6b7280;">
+        <p>ByteShop v1.0.0</p>
+        <p style="margin-top: 0.25rem;">Premium Gaming Gear & Tech</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Shipping Page -->
+  <main id="shippingSection" class="page" style="background: #f9fafb;">
+    <div class="header">
+      <div class="header-content">
+        <a href="#cart" style="text-decoration: none;">
+          <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </a>
+        <h1 style="font-weight: 600; color: #111827; font-size: 1rem;">Shipping Address</h1>
+        <div style="width: 1.5rem;"></div>
+      </div>
+    </div>
+    <div class="container" style="padding-top: 1.5rem;">
+      <div style="background: white; border-radius: 0.5rem; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);">
+        <form id="shippingForm">
+          <div class="form-group">
+            <label for="shippingName">Full Name</label>
+            <input type="text" id="shippingName" class="form-control" placeholder="John Doe" required>
+          </div>
+          <div class="form-group">
+            <label for="shippingMobile">Mobile Number</label>
+            <input type="tel" id="shippingMobile" class="form-control" placeholder="+1 (555) 000-0000" required>
+          </div>
+          <div class="form-group">
+            <label for="shippingFlatNo">Flat / House No.</label>
+            <input type="text" id="shippingFlatNo" class="form-control" placeholder="Apt 123" required>
+          </div>
+          <div class="form-group">
+            <label for="shippingArea">Area / Street</label>
+            <input type="text" id="shippingArea" class="form-control" placeholder="Main Street" required>
+          </div>
+          <div class="form-group">
+            <label for="shippingPincode">Pincode / ZIP Code</label>
+            <input type="text" id="shippingPincode" class="form-control" placeholder="12345" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block" style="margin-top: 2rem; border-radius: 0.5rem; padding: 1rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+            Continue to Payment
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Payment Page -->
+  <main id="paymentSection" class="page" style="background: #f9fafb;">
+    <div class="header">
+      <div class="header-content">
+        <a href="#shipping" style="text-decoration: none;">
+          <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </a>
+        <h1 style="font-weight: 600; color: #111827; font-size: 1rem;">Payment Method</h1>
+        <div style="width: 1.5rem;"></div>
+      </div>
+    </div>
+    <div class="container" style="padding-top: 1.5rem;">
+      <div style="background: linear-gradient(to right, #2563eb, #9333ea); border-radius: 0.5rem; padding: 1.5rem; color: white; margin-bottom: 1.5rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+        <p style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 0.25rem;">Total Amount</p>
+        <p id="totalAmount" style="font-size: 1.875rem; font-weight: bold;"></p>
+      </div>
+      <form id="paymentForm">
+        <div style="background: white; border-radius: 0.5rem; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); margin-bottom: 1.5rem;">
+          <h2 style="font-weight: 600; color: #111827; margin-bottom: 1rem;">Select Payment Method</h2>
+          <div style="margin-bottom: 0.75rem;">
+            <label class="payment-option">
+              <input type="radio" name="payment" value="upi" checked>
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+              </svg>
+              <div class="payment-option-info">
+                <p class="payment-option-title">UPI</p>
+                <p class="payment-option-desc">Pay using UPI apps</p>
+              </div>
+            </label>
+          </div>
+          <div style="margin-bottom: 0.75rem;">
+            <label class="payment-option">
+              <input type="radio" name="payment" value="card">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+              </svg>
+              <div class="payment-option-info">
+                <p class="payment-option-title">Credit Card</p>
+                <p class="payment-option-desc">Visa, Mastercard, Amex</p>
+              </div>
+            </label>
+          </div>
+          <div>
+            <label class="payment-option">
+              <input type="radio" name="payment" value="cod">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 003-3V8a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+              </svg>
+              <div class="payment-option-info">
+                <p class="payment-option-title">Cash on Delivery</p>
+                <p class="payment-option-desc">Pay when you receive</p>
+              </div>
+            </label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" style="border-radius: 0.5rem; padding: 1rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+          Pay Now
+        </button>
+      </form>
+      <p style="text-align: center; font-size: 0.875rem; color: #6b7280; margin-top: 1rem;">
+        Your payment information is secure and encrypted
+      </p>
+    </div>
+  </main>
+
+  <!-- Success Page -->
+  <main id="successSection" class="page">
+    <div class="success-screen">
+      <div class="success-card">
+        <div class="success-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <h1>Thank You!</h1>
+        <p>Your order has been placed successfully</p>
+        <div class="order-id">
+          <p>Order ID</p>
+          <p id="orderId"></p>
+        </div>
+        <div class="order-steps">
+          <div class="order-step">
+            <div class="step-icon completed">✓</div>
+            <div class="step-info">
+              <h3>Order Confirmed</h3>
+              <p>We've received your order</p>
+            </div>
+          </div>
+          <div class="order-step">
+            <div class="step-icon pending">2</div>
+            <div class="step-info">
+              <h3>Processing</h3>
+              <p>We're preparing your items</p>
+            </div>
+          </div>
+          <div class="order-step">
+            <div class="step-icon pending">3</div>
+            <div class="step-info">
+              <h3>On the way</h3>
+              <p>Estimated delivery in 3-5 days</p>
+            </div>
+          </div>
+        </div>
+        <a href="#home" class="btn btn-primary btn-block" style="border-radius: 0.5rem; padding: 1rem;">
+          Back to Home
+        </a>
+        <p style="font-size: 0.875rem; color: #6b7280; margin-top: 1rem;">
+          Order confirmation sent to your email
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <script src="products.js"></script>
+  <script>
+    const pageMap = {
+      welcome: 'welcomeSection',
+      login: 'loginSection',
+      signup: 'signupSection',
+      home: 'homeSection',
+      search: 'searchSection',
+      product: 'productSection',
+      cart: 'cartSection',
+      profile: 'profileSection',
+      shipping: 'shippingSection',
+      payment: 'paymentSection',
+      success: 'successSection'
+    };
+
+    let selectedProduct = null;
+    let selectedColor = 'Black';
+
+    function parseHash() {
+      const raw = window.location.hash.slice(1);
+      const [route = 'welcome', query = ''] = raw.split('?');
+      return {
+        route: route || 'welcome',
+        params: new URLSearchParams(query)
+      };
+    }
+
+    function showSection(route, params) {
+      const allPages = document.querySelectorAll('.page');
+      allPages.forEach(page => page.classList.remove('active'));
+      const sectionId = pageMap[route] || pageMap.welcome;
+      document.getElementById(sectionId).classList.add('active');
+      updateBottomNav(route);
+
+      switch (route) {
+        case 'home':
+          renderHome();
+          break;
+        case 'search':
+          renderSearch(params);
+          break;
+        case 'product':
+          renderProduct(params);
+          break;
+        case 'cart':
+          renderCart();
+          break;
+        case 'profile':
+          renderProfile();
+          break;
+        case 'shipping':
+          renderShipping();
+          break;
+        case 'payment':
+          renderPayment();
+          break;
+        case 'success':
+          renderSuccess();
+          break;
+        default:
+          // welcome, login, signup, or unknown route
+          break;
+      }
+    }
+
+    function updateBottomNav(route) {
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.toggle('active', item.getAttribute('href') === '#' + route);
+      });
+    }
+
+    function renderHome() {
+      const featuredProducts = document.getElementById('featuredProducts');
+      featuredProducts.innerHTML = '';
+      products.slice(0, 4).forEach(product => {
+        const card = document.createElement('a');
+        card.className = 'product-card';
+        card.href = `#product?id=${product.id}`;
+        card.innerHTML = `
+          <div class="product-image">
+            <img src="${product.image}" alt="${product.name}">
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">${product.name}</h3>
+            <div class="product-footer">
+              <span class="product-price">$${product.price}</span>
+              <div class="product-rating">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                <span>${product.rating}</span>
+              </div>
+            </div>
+          </div>
+        `;
+        featuredProducts.appendChild(card);
+      });
+      updateCartBadge();
+    }
+
+    function renderSearch(params) {
+      const category = params.get('category');
+      const title = document.getElementById('categoryTitle');
+      const input = document.getElementById('searchInput');
+      const query = category || input.value || '';
+      if (category) {
+        input.value = category;
+        title.textContent = category;
+      } else if (!input.value) {
+        title.textContent = 'All Products';
+      }
+      displayProducts(query ? products.filter(p => p.category === category) : products);
+    }
+
+    function displayProducts(items) {
+      const container = document.getElementById('productsContainer');
+      const emptyState = document.getElementById('emptyState');
+      const productCount = document.getElementById('productCount');
+      container.innerHTML = '';
+      if (items.length === 0) {
+        emptyState.style.display = 'block';
+        container.style.display = 'none';
+      } else {
+        emptyState.style.display = 'none';
+        container.style.display = 'grid';
+        items.forEach(product => {
+          const card = document.createElement('a');
+          card.className = 'product-card';
+          card.href = `#product?id=${product.id}`;
+          card.innerHTML = `
+            <div class="product-image">
+              <img src="${product.image}" alt="${product.name}">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">${product.name}</h3>
+              <div class="product-footer">
+                <span class="product-price">$${product.price}</span>
+                <div class="product-rating">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                  <span>${product.rating}</span>
+                </div>
+              </div>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      }
+      productCount.textContent = `${items.length} ${items.length === 1 ? 'product' : 'products'} found`;
+    }
+
+    function renderProduct(params) {
+      const id = params.get('id');
+      selectedProduct = products.find(p => p.id === id);
+      if (!selectedProduct) {
+        window.location.hash = '#search';
+        return;
+      }
+      selectedColor = 'Black';
+      document.getElementById('productImage').src = selectedProduct.image;
+      document.getElementById('productName').textContent = selectedProduct.name;
+      document.getElementById('productRating').textContent = selectedProduct.rating;
+      document.getElementById('productPrice').textContent = `$${selectedProduct.price}`;
+      document.getElementById('productDescription').textContent = selectedProduct.description;
+      document.querySelectorAll('.color-option').forEach(button => {
+        button.style.borderColor = button.dataset.color === 'Black' ? '#2563eb' : '#d1d5db';
+        button.style.background = button.dataset.color === 'Black' ? '#eff6ff' : 'white';
+        button.style.color = button.dataset.color === 'Black' ? '#2563eb' : '#374151';
+      });
+      updateCartBadge();
+    }
+
+    function renderCart() {
+      const cartItemsContainer = document.getElementById('cartItems');
+      const orderSummaryContainer = document.getElementById('orderSummary');
+      const emptyCart = document.getElementById('emptyCart');
+      const checkoutButton = document.getElementById('checkoutButton');
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      if (cart.length === 0) {
+        emptyCart.style.display = 'block';
+        cartItemsContainer.innerHTML = '';
+        orderSummaryContainer.innerHTML = '';
+        checkoutButton.style.display = 'none';
+        updateCartBadge();
+        return;
+      }
+      emptyCart.style.display = 'none';
+      checkoutButton.style.display = 'block';
+      cartItemsContainer.innerHTML = cart.map((item, index) => `
+        <div class="cart-item">
+          <div class="cart-item-content">
+            <div class="cart-item-image">
+              <img src="${item.image}" alt="${item.name}">
+            </div>
+            <div class="cart-item-info">
+              <h3 class="cart-item-name">${item.name}</h3>
+              ${item.color ? `<p class="cart-item-color">Color: ${item.color}</p>` : ''}
+              <p class="cart-item-price">$${item.price}</p>
+            </div>
+            <button class="delete-btn" onclick="removeCartItem(${index})">
+              <svg style="width: 1.25rem; height: 1.25rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+              </svg>
+            </button>
+          </div>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="updateCartQuantity(${index}, -1)">
+              <svg style="width: 1rem; height: 1rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+              </svg>
+            </button>
+            <span class="quantity">${item.quantity}</span>
+            <button class="quantity-btn" onclick="updateCartQuantity(${index}, 1)">
+              <svg style="width: 1rem; height: 1rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      `).join('');
+      const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const tax = subtotal * 0.08;
+      const shipping = 10;
+      const total = subtotal + tax + shipping;
+      orderSummaryContainer.innerHTML = `
+        <div class="order-summary">
+          <h2 style="font-weight: 600; color: #111827; margin-bottom: 1rem;">Order Summary</h2>
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span>$${subtotal.toFixed(2)}</span>
+          </div>
+          <div class="summary-row">
+            <span>Tax (8%)</span>
+            <span>$${tax.toFixed(2)}</span>
+          </div>
+          <div class="summary-row">
+            <span>Shipping</span>
+            <span>$${shipping.toFixed(2)}</span>
+          </div>
+          <div class="summary-total">
+            <span>Total</span>
+            <span class="amount">$${total.toFixed(2)}</span>
+          </div>
+        </div>
+      `;
+      updateCartBadge();
+    }
+
+    function renderProfile() {
+      const user = JSON.parse(localStorage.getItem('user') || 'null');
+      if (user) {
+        document.getElementById('userName').textContent = user.name || 'Guest User';
+        document.getElementById('userEmail').textContent = user.email || '';
+        document.getElementById('userInfo').style.display = 'flex';
+        document.getElementById('loginPrompt').style.display = 'none';
+        document.getElementById('logoutBtn').style.display = 'flex';
+      } else {
+        document.getElementById('userInfo').style.display = 'none';
+        document.getElementById('loginPrompt').style.display = 'block';
+        document.getElementById('logoutBtn').style.display = 'none';
+      }
+    }
+
+    function renderShipping() {
+      document.getElementById('shippingForm').reset();
+    }
+
+    function renderPayment() {
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const tax = subtotal * 0.08;
+      const shipping = 10;
+      const total = subtotal + tax + shipping;
+      document.getElementById('totalAmount').textContent = `$${total.toFixed(2)}`;
+      document.querySelectorAll('.payment-option').forEach(option => option.classList.remove('selected'));
+      const firstOption = document.querySelector('.payment-option');
+      if (firstOption) firstOption.classList.add('selected');
+    }
+
+    function renderSuccess() {
+      const orderId = Math.floor(Math.random() * 90000) + 10000;
+      document.getElementById('orderId').textContent = `#${orderId}`;
+    }
+
+    function updateCartBadge() {
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const badge = document.getElementById('cartBadge');
+      if (badge) {
+        if (cart.length > 0) {
+          badge.textContent = cart.length;
+          badge.style.display = 'flex';
+        } else {
+          badge.style.display = 'none';
+        }
+      }
+    }
+
+    function addToCart(product, color) {
+      if (!product) return;
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const cartItem = { ...product, color, quantity: 1 };
+      const existingIndex = cart.findIndex(item => item.id === product.id && item.color === color);
+      if (existingIndex >= 0) {
+        cart[existingIndex].quantity++;
+      } else {
+        cart.push(cartItem);
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartBadge();
+      alert('Added to cart!');
+    }
+
+    function removeCartItem(index) {
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    function updateCartQuantity(index, change) {
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      if (!cart[index]) return;
+      cart[index].quantity += change;
+      if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    function setupListeners() {
+      document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        localStorage.setItem('user', JSON.stringify({ email: email, name: 'John Doe' }));
+        window.location.hash = '#home';
+      });
+      document.getElementById('signupForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const password = document.getElementById('signupPassword').value;
+        const confirmPassword = document.getElementById('signupConfirmPassword').value;
+        if (password !== confirmPassword) {
+          alert('Passwords do not match!');
+          return;
+        }
+        const name = document.getElementById('signupName').value;
+        const email = document.getElementById('signupEmail').value;
+        localStorage.setItem('user', JSON.stringify({ email: email, name: name }));
+        window.location.hash = '#home';
+      });
+      document.getElementById('shippingForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        window.location.hash = '#payment';
+      });
+      document.getElementById('paymentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        localStorage.removeItem('cart');
+        window.location.hash = '#success';
+      });
+      document.getElementById('searchInput').addEventListener('input', function(e) {
+        const query = e.target.value.toLowerCase();
+        const filtered = query
+          ? products.filter(p => p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query))
+          : products;
+        displayProducts(filtered);
+      });
+      document.querySelectorAll('.color-option').forEach(btn => {
+        btn.addEventListener('click', function() {
+          selectedColor = this.dataset.color;
+          document.querySelectorAll('.color-option').forEach(b => {
+            b.style.borderColor = '#d1d5db';
+            b.style.background = 'white';
+            b.style.color = '#374151';
+          });
+          this.style.borderColor = '#2563eb';
+          this.style.background = '#eff6ff';
+          this.style.color = '#2563eb';
+        });
+      });
+      document.getElementById('addToCartBtn').addEventListener('click', function() {
+        addToCart(selectedProduct, selectedColor);
+      });
+      document.getElementById('buyNowBtn').addEventListener('click', function() {
+        addToCart(selectedProduct, selectedColor);
+        window.location.hash = '#cart';
+      });
+      document.querySelectorAll('.payment-option').forEach(option => {
+        option.addEventListener('click', function() {
+          document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
+          this.classList.add('selected');
+        });
+      });
+      document.getElementById('logoutBtn').addEventListener('click', function() {
+        localStorage.removeItem('user');
+        window.location.hash = '#login';
+      });
+      window.addEventListener('hashchange', () => {
+        const { route, params } = parseHash();
+        showSection(route, params);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      setupListeners();
+      const { route, params } = parseHash();
+      showSection(route, params);
+    });
+
+    window.removeCartItem = removeCartItem;
+    window.updateCartQuantity = updateCartQuantity;
+  </script>
+</body>
+</html>
